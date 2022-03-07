@@ -96,9 +96,23 @@ class Quiz00:
         Account.main()
 
     def quiz09gugudan(self):  # 책받침구구단
-        pass
+        #Comprension [i for i in range()]
+        gugudan = [[i, j, i*j] for i in range(2,6) for j in range(1,10)]
+        for i in gugudan:
+            print(f'{i[0]}*{i[1]}={i[2]}')
 
-
+        '''
+        #for문 활용(,end= '\t' -> 문자열을 가로로 나열)
+        for i in range(1, 10):
+            for j in range(2,6):
+                print(f'{j} * {i} = {j*i}',end = '\t')
+            print(' ')
+        print(' ')
+        for i in range(1, 10):
+            for j in range(6,10):
+                print(f'{j} * {i} = {j*i}',end = '\t')
+            print('')
+        '''
 '''
 08번 문제 해결을 위한 클래스는 다음과 같다.
 [요구사항(RFP)]
