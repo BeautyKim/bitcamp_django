@@ -90,14 +90,16 @@ class Quiz00:
         #return random.choice(memberlist())
 
     def quiz07lotto(self):
-        pass
+        lotto = random.sample(range(1,46),6)
+        return print(lotto)
 
     def quiz08bank(self):  # 이름, 입금, 출금만 구현
         Account.main()
 
     def quiz09gugudan(self):  # 책받침구구단
         #Comprension [i for i in range()]
-        gugudan = [[i, j, i*j] for i in range(2,6) for j in range(1,10)]
+        #[i, j, i*j] 리스트 i에 2~5까지 숫자, j에 1~9까지의 숫자가 출력되게 한다
+        gugudan = [[i, j, i*j] for i in range(2,10) for j in range(1,10)]
         for i in gugudan:
             print(f'{i[0]}*{i[1]}={i[2]}')
 
@@ -139,14 +141,17 @@ class Account(object):
 
     #[i for i in range]
     def creat_account_number(self):
-        '''
+        #i가 3과 6번 자리일때 '-' 로 출력하고 아닐때는 0~9까지의 랜덤한 숫자를 13번 반복해서 출력해라
+        return ''.join(['-' if i==3 or i==6 else str(myRandom(0,10)) for i in range(13)])
+
+    '''
         ls = [str(myRandom(0,10)) for i in range(3)]
         ls.append('-')
         ls += [str(myRandom(0,10)) for i in range(2)]
         ls.append('-')
         ls += [str(myRandom(0,10)) for i in range(6)]
-        '''
-        return ''.join(['-' if i==3 or i==6 else str(myRandom(0,10)) for i in range(13)])
+    '''
+
     def del_account(self, ls, account_number):
         for i, j in enumerate(ls):
             if j.account_number == account_number:
