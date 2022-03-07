@@ -50,9 +50,14 @@ class Quiz20:
         return None
 
     def quiz23listcom(self) -> str:
-        print('#' * 30)
-
-        print('#' * 30)
+        print('-----------------legacy----------------')
+        a = []
+        for i in range(5):
+            a.append(i)
+        print(a)
+        print('-----------------Comprension----------------')
+        a2 = [i for i in range(5)]
+        print(a2)
         return None
 
     def quiz24zip(self) -> str: return None
