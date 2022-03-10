@@ -98,11 +98,19 @@ class Quiz00:
         Account.main()
 
     def quiz09gugudan(self):  # 책받침구구단
-        #Comprension [i for i in range()]
-        #[i, j, i*j] 리스트 i에 2~5까지 숫자, j에 1~9까지의 숫자가 출력되게 한다
-        gugudan = [[i, j, i*j] for i in range(2,10) for j in range(1,10)]
-        for i in gugudan:
-            print(f'{i[0]}*{i[1]}={i[2]}')
+        #3중 for문
+        for i in range(0, 2):
+            for j in range(1, 10):
+                for k in range(2+(4*i), 6+(4*i)):
+                    print(f'{k}*{j}={k*j}',end='\t')
+                print('')
+            print('')
+
+        # Comprension [i for i in range()]
+        # [i, j, i*j] 리스트 i에 2~5까지 숫자, j에 1~9까지의 숫자가 출력되게 한다
+        # gugudan = [[i, j, i*j] for i in range(2,10) for j in range(1,10)]
+        # for i in gugudan:
+        #     print(f'{i[0]}*{i[1]}={i[2]}')
 
         '''
         #for문 활용(,end= '\t' -> 문자열을 가로로 나열)
@@ -164,9 +172,13 @@ class Account(object):
         for i, j in enumerate(ls):
             if j.account_number == account_number:
                 del ls[i]
+
     @staticmethod
-    def deposit(ls, account_number, deposit):
-        return [Account.find_account(ls, account_number) for i in deposit]
+    def deposit(ls, account_number, money):
+        for i, j in enumerate(ls):
+            if j.account_number == account_number:
+                j.money = j.money + money
+        return ls[i].to_string()
 
     @staticmethod
     def main():
@@ -180,15 +192,15 @@ class Account(object):
                 print(f'{acc.to_string()} ...개설 되었습니다')
                 ls.append(acc)
             elif menu =='2':
-                print( '\n'.join([i.to_string() for i in ls]))
+                print( '\n'.join(i.to_string() for i in ls))
             elif menu =='3':
-                account_number = input('계좌번호')
-                deposit = int(input('입금액'))
-
+                print(Account.deposit(ls, input('입금 계좌번호'), int(input('입급액'))))
 
             elif menu =='4':
                 account_number = input('출금할 계좌번호')
-                money = int(input('출금액'))
+                withdraw = int(input('출금액'))
+                pass
+
 
             elif menu == '5':
                 Account.del_account(ls, input('탈퇴할 계좌번호'))

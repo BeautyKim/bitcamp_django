@@ -65,14 +65,21 @@ class Quiz20:
     def quiz24zip(self) -> str:
         url = 'https://music.bugs.co.kr/chart/track/realtime/total'
         html_doc = urlopen(url)
-        soup = BeautifulSoup(html_doc, 'lxml') # html.parser vs lxml
-        # print(soup.prettify())
-        # artist = soup.find_all(attrs={'class':'artist'})
-        a = [i.get_text().strip() for i in soup.find_all('p', {'class':'artist'})]
-        print(a[0:3]) #출력결과 -> ['MSG워너비(M.O.M)', '태연 (TAEYEON)', '멜로망스(MeloMance)']
+        soup = BeautifulSoup(html_doc, 'lxml')
 
+        for i, j in enumerate(['artist', 'titles']):
+            print('\n'.join(i for i in [i for i in self.musicChart(soup,j)]))
 
         return None
+
+    @staticmethod
+    def musicChart(soup, a) -> str:
+        artist = soup.find_all('p', {'class': a})
+        artist = [i.get_text() for i in artist]
+        titles = soup.find_all('p', {'class': a})
+        titles = [i.get_text() for i in titles]
+        return artist
+
 
     def quiz25dictcom(self) -> str: return None
 
@@ -85,12 +92,10 @@ class Quiz20:
         req = urllib.request.Request(url, headers=headers)
         soup = BeautifulSoup(urlopen(req).read(), 'lxml')
         print('\n'.join([i.get_text().strip() for i in soup.find_all('div',{'class':'ellipsis rank01'})][0:3]))
-                                                                                                                #출력화면
-                                                                                                                #INVU
-                                                                                                                # 사랑은 늘 도망가
-                                                                                                                # 취중고백
+
         return None
 
-    def quiz28(self) -> str: return None
+    def quiz28(self) -> str:
+        return None
 
     def quiz29(self) -> str: return None
