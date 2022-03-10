@@ -116,15 +116,28 @@ class Quiz20:
 
     def quiz26map(self) -> str: return None
 
-    def quiz27melon(self) -> str:
-
+    def quiz27melon(self) -> {}:
         headers = {'User-Agent': 'Mozilla/5.0'}
         url = 'https://www.melon.com/chart/index.htm?dayTime=2022030816'
         req = urllib.request.Request(url, headers=headers)
         soup = BeautifulSoup(urlopen(req).read(), 'lxml')
-        print('\n'.join([i.get_text().strip() for i in soup.find_all('div',{'class':'ellipsis rank01'})][0:3]))
+        ls1 = self.melon_music_chart(soup, 'ellipsis rank01')
+        ls2 = self.melon_music_chart2(soup, 'checkEllipsis')
+        dict = {}
+        for i, j in zip(ls1, ls2):
+            dict[i] = j
+        print(dict)
+        return dict
 
         return None
+
+    @staticmethod
+    def melon_music_chart(soup, cls_nm) -> []:
+        return [i.get_text().strip() for i in soup.find_all('div',{'class': cls_nm})]
+
+    @staticmethod
+    def melon_music_chart2(soup, cls_nm) -> []:
+        return [i.get_text().strip() for i in soup.find_all('span',{'class': cls_nm})]
 
     def quiz28dataframe(self) -> None:
         dict = self.quiz24zip()
@@ -133,5 +146,8 @@ class Quiz20:
         df.to_csv('./save/bugs.csv', sep=',', na_rep='NaN')
 
 
-
-    def quiz29(self) -> str: return None
+    def quiz29dataframe2(self) -> None:
+        dict = self.quiz27melon()
+        df = pd.DataFrame.from_dict(dict, orient='index')
+        print(df)
+        df.to_csv('./save/melon.csv', sep=',', na_rep='NaN')
