@@ -124,7 +124,7 @@ class Quiz20:
     def music_chart(soup, cls_nm) -> []:
         return [i.get_text().strip() for i in soup.find_all('p', {'class': cls_nm})]
 
-    def quiz25dictcom(self) -> str:
+    def quiz25dictcom(self) -> {}:
         # students quiz06memberChoice() 를 import 해서 5명 추출
         # scores 는 0 ~ 100점 사이에서 랜덤
         # students = [memberlist()[i] for i in random.sample(range(0,23),5)]
@@ -135,7 +135,7 @@ class Quiz20:
             students.add(q.quiz06member_choice())
         students = list(students)
         # print(dict(zip(students, scores)))
-        return {i:j for i, j in zip(students, scores)}
+        return print({i:j for i, j in zip(students, scores)})
 
     def quiz26map(self) -> str: return None
 
@@ -168,8 +168,26 @@ class Quiz20:
         print(df)
         df.to_csv('./save/bugs.csv', sep=',', na_rep='NaN')
 
-    def quiz29dataframe2(self) -> None:
+    def dataframe2(self) -> None:
         dict = self.quiz27melon()
         df = pd.DataFrame.from_dict(dict, orient='index')
         print(df)
         df.to_csv('./save/melon.csv', sep=',', na_rep='NaN')
+    '''
+    다음 결과 출력
+        a   b   c
+    1   1   3   5
+    2   2   4   6
+    '''
+
+    def quiz29_pandas_01(self) -> object:
+        a = []
+        b = []
+        [a.append(i) if i % 2 == 1 else b.append(i) for i in range(1, 7)]
+        columns = [chr(i) for i in range(97, 100)]
+        # key = ['1', '2']
+        d = {'1': a, '2': b}
+        df = pd.DataFrame.from_dict(d, orient='index', columns=columns)
+        print(df)
+
+        return None
