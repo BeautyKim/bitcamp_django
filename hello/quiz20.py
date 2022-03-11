@@ -4,6 +4,10 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import pandas as pd
 
+from hello import Quiz00
+from hello.domains import memberlist, myRandom, my100
+
+
 class Quiz20:
 
     def quiz20list(self) -> str:
@@ -71,13 +75,14 @@ class Quiz20:
         # a = [i for i in cls_names]
         ls1 = self.music_chart(soup, 'title')
         ls2 = self.music_chart(soup, 'artist')
+        dt = {i:j for i,j in zip(ls1, ls2)}
+        l = [i + j for i, j in zip(ls1, ls2)]
+        l2 = list(zip(ls1, ls2))
+        d1 = dict(zip(ls1, ls2))
+        print(d1)
         # self.dict1(ls1, ls2)
         # self.dict2(ls1,ls2)
-        dict = {}
-        for i, j in zip(ls1, ls2):
-            dict[i] = j
-        print(dict)
-        return dict
+        # self.dict3(ls1, ls2)
 
     @staticmethod
     def dict1(ls1, ls2) -> None:
@@ -91,6 +96,13 @@ class Quiz20:
         dict = {}
         for i, j in enumerate(ls1):
             dict[j] = ls2[i]
+        print(dict)
+
+    @staticmethod
+    def dict3(ls1, ls2) -> None:
+        dict = {}
+        for i, j in zip(ls1, ls2):
+            dict[i] = j
         print(dict)
 
 
@@ -112,7 +124,18 @@ class Quiz20:
     def music_chart(soup, cls_nm) -> []:
         return [i.get_text().strip() for i in soup.find_all('p', {'class': cls_nm})]
 
-    def quiz25dictcom(self) -> str: return None
+    def quiz25dictcom(self) -> str:
+        # students quiz06memberChoice() 를 import 해서 5명 추출
+        # scores 는 0 ~ 100점 사이에서 랜덤
+        # students = [memberlist()[i] for i in random.sample(range(0,23),5)]
+        q = Quiz00()
+        students = set([q.quiz06member_choice() for i in range(5)])
+        scores = [my100() for i in range(5)]
+        while len(students) != 5:
+            students.add(q.quiz06member_choice())
+        students = list(students)
+        # print(dict(zip(students, scores)))
+        return {i:j for i, j in zip(students, scores)}
 
     def quiz26map(self) -> str: return None
 
@@ -144,7 +167,6 @@ class Quiz20:
         df = pd.DataFrame.from_dict(dict, orient='index')
         print(df)
         df.to_csv('./save/bugs.csv', sep=',', na_rep='NaN')
-
 
     def quiz29dataframe2(self) -> None:
         dict = self.quiz27melon()

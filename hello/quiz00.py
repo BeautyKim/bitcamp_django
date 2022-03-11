@@ -85,9 +85,10 @@ class Quiz00:
                      f'{gradePass}입니다\n'
                      +('#'*30))
 
-    def quiz06memberChoice(self):
-        return memberlist()[myRandom(0,23)]
-        #return random.choice(memberlist())
+    @staticmethod
+    def quiz06member_choice() -> float:
+        # return memberlist()[myRandom(0,23)]
+        return random.choice(memberlist())
 
     def quiz07lotto(self):
         #숫자 리스트 샘플링
@@ -136,7 +137,7 @@ class Quiz00:
 class Account(object):
     def __init__(self, name, account_number, money):
         self.BANK_NAME = '비트은행'
-        self.name = Quiz00().quiz06memberChoice() if name == None else name
+        self.name = Quiz00().quiz06member_choice() if name == None else name
         #self.account_number = f'{myRandom(0,1000):0>3}-{myRandom(0,100):0>2}-{myRandom(0,1000000):0>6}'
         self.account_number = self.creat_account_number()
         self.money = myRandom(100, 1000)
