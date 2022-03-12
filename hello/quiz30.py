@@ -57,10 +57,13 @@ class Quiz30:
                         GOJKU  62  17  75  49
     '''
     def quiz32_df_grade(self) -> str:
-        ls = []
-        idx = []
-        col = []
+        a = [chr(i) for i in range(65, 90)]
+        b = [chr(i) for i in range(97, 122)]
+        ls = [[myRandom(10, 100) for i in range(4)] for i in range(10)]
+        idx = [''.join([random.choice(a+b) for i in range(5)]) for i in range(10)]
+        col = ['국어', '영어', '수학', '사회']
         df = pd.DataFrame(ls, index=idx, columns=col)
+        ic(df)
 
         return None
 
