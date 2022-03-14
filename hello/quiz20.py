@@ -181,13 +181,41 @@ class Quiz20:
     '''
 
     def quiz29_pandas_01(self) -> object:
-        a = []
-        b = []
-        [a.append(i) if i % 2 == 1 else b.append(i) for i in range(1, 7)]
+        odds = []
+        evens = []
+        [odds.append(i) if i % 2 == 1 else evens.append(i) for i in range(1, 7)]
         columns = [chr(i) for i in range(97, 100)]
-        # key = ['1', '2']
-        d = {'1': a, '2': b}
-        df = pd.DataFrame.from_dict(d, orient='index', columns=columns)
-        print(df)
+        d = {'1': odds, '2': evens}
+        # d1 = {'1': odds}
+        # d2 = {'2': evens}
+        # d3 = dict(d1, **d2) 딕셔너리 합치는 방법
+
+        df1 = pd.DataFrame.from_dict(d, orient='index', columns=columns)
+        '''
+            a   b   c
+        1   1   3   5
+        2   2   4   6
+        '''
+        df2 = pd.DataFrame.from_dict(d)
+        '''
+           1  2
+        0  1  2
+        1  3  4
+        2  5  6
+        '''
+        df3 = pd.DataFrame.from_dict(d, orient='index')
+        '''
+           0  1  2
+        1  1  3  5
+        2  2  4  6
+        '''
+        df4 = pd.DataFrame.from_dict(d, orient='index', columns=['A', 'B', 'C'])
+        '''
+           A  B  C
+        1  1  3  5
+        2  2  4  6
+        '''
+        df5 = pd.DataFrame.from_dict(d, orient='index', columns=columns)
+        print(df5)
 
         return None

@@ -1,5 +1,7 @@
 import random
+import string
 
+import numpy as np
 import pandas as pd
 from icecream import ic
 
@@ -16,6 +18,11 @@ class Quiz30:
             4  10  11  12
     '''
     def quiz30_df_4_by_3(self) -> str:
+        # df = pd.DataFrame([[1,2,3],
+        #                   [4,5,6],
+        #                   [7,8,9],
+        #                   [10,11,12]], index=range(1,5), columns=['A','B','C'])
+
         # 위 식을 리스트결합 형태로 분해해서 조립하시오
         ls = [[i for i in range(1, 13)[i*3:(i+1)*3]] for i in range(4)]
         print(ls)
@@ -33,9 +40,9 @@ class Quiz30:
     '''
 
     def quiz31_rand_2_by_3(self) -> str:
-        ls = [[myRandom(10, 100) for i in range(3)] for i in range(2)]
-        # print(ls)
-        df = pd.DataFrame(ls, index=[0, 1], columns=[0, 1, 2])
+        df = pd.DataFrame([[myRandom(10, 100) for i in range(3)] for i in range(2)])
+        # 넘파이 사용한 예제
+        # df = pd.DataFrame(np.random.randint(10, 100, size=(2, 3)))
         ic(df)
         return None
 
@@ -56,15 +63,29 @@ class Quiz30:
                         PZOTP  94  78  79  96
                         GOJKU  62  17  75  49
     '''
-    def quiz32_df_grade(self) -> str:
-        a = [chr(i) for i in range(65, 90)]
-        b = [chr(i) for i in range(97, 122)]
-        ls = [[myRandom(10, 100) for i in range(4)] for i in range(10)]
-        idx = [''.join([random.choice(a+b) for i in range(5)]) for i in range(10)]
-        col = ['국어', '영어', '수학', '사회']
-        df = pd.DataFrame(ls, index=idx, columns=col)
-        ic(df)
+    @staticmethod
+    def id(chr_size) -> str: return ''.join([random.choice(string.ascii_letters) for i in range(chr_size)])
+    def quiz32_df_grade(self) -> object:
+        # a = [chr(i) for i in range(65, 90)]
+        # b = [chr(i) for i in range(97, 122)]
+        # ls = [[myRandom(10, 100) for i in range(4)] for i in range(10)]
+        # idx = [''.join([random.choice(a+b) for i in range(5)]) for i in range(10)]
+        # col = ['국어', '영어', '수학', '사회']
+        # df = pd.DataFrame(ls, index=idx, columns=col)
+        # idx = [''.join([random.choice(string.ascii_letters) for i in range(5)]) for i in range(10)]
 
+        data1 = [[myRandom(0, 101) for i in range(4)] for i in range(10)]
+        col = ['국어', '영어', '수학', '사회']
+        idx = [self.id(chr_size=5) for i in range(10)]
+        df1 = pd.DataFrame(data1, index=idx, columns=col)
+        ic(df1)
+
+        data2 = [[myRandom(0, 101) for i in range(4)] for i in range(10)]
+        col2 = ['국어', '영어', '수학', '사회']
+        idx2 = [self.id(chr_size=5) for i in range(10)]
+        ls = dict(zip(idx2, data2))
+        df2 = pd.DataFrame.from_dict(ls, orient='index', columns=col2)
+        ic(df2)
         return None
 
     def quiz33(self) -> str: return None
