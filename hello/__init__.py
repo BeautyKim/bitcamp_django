@@ -49,7 +49,7 @@ if __name__ == '__main__':
         elif menu == '31': q3.quiz31_rand_2_by_3()
         elif menu == '32': q3.quiz32_df_grade()
         elif menu == '33': q3.quiz33_df_loc()
-        elif menu == '34': q3.quiz34()
+        elif menu == '34': q3.quiz34_iloc()
         elif menu == '35': q3.quiz35()
         elif menu == '36': q3.quiz36()
         elif menu == '37': q3.quiz37()

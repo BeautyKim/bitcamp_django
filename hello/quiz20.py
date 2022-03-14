@@ -149,7 +149,9 @@ class Quiz20:
         dict = {}
         for i, j in zip(ls1, ls2):
             dict[i] = j
-        print(dict)
+        df = pd.DataFrame.from_dict(dict, orient='index')
+        df.to_csv('./save/melon.csv', sep=',', na_rep='NaN')
+
         return dict
 
         return None
@@ -168,11 +170,6 @@ class Quiz20:
         print(df)
         df.to_csv('./save/bugs.csv', sep=',', na_rep='NaN')
 
-    def dataframe2(self) -> None:
-        dict = self.quiz27melon()
-        df = pd.DataFrame.from_dict(dict, orient='index')
-        print(df)
-        df.to_csv('./save/melon.csv', sep=',', na_rep='NaN')
     '''
     다음 결과 출력
         a   b   c

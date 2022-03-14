@@ -1,11 +1,10 @@
 import random
 import string
-
 import numpy as np
 import pandas as pd
 from icecream import ic
-
-from hello.domains import my100, myRandom
+from titanic.models import Model
+from hello.domains import my100, myRandom, memberlist
 
 
 class Quiz30:
@@ -80,6 +79,56 @@ class Quiz30:
         return None
 
     def quiz33_df_loc(self) -> str:
+
+        subj = ['자바', '파이썬', '자바스크립트', 'SQL']
+        stud = memberlist()
+        data = np.random.randint(0, 100, (len(memberlist()), len(subj)))
+        df1 = pd.DataFrame.from_dict(dict(zip(stud, data)), orient='index', columns=subj)
+        # df2 = pd.DataFrame(data, index=stud, columns=subj)
+        # ic(df2)
+        # df1.to_csv('./save/my_grade.csv', sep=',', na_rep='NaN')
+        # https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html
+        model = Model()
+        grade_df = model.new_model('grade.csv')
+        ic(grade_df)
+
+
+        '''
+                자바  파이썬  자바스크립트  SQL
+        홍정명  61   93      24   16
+        노홍주  47   38      62   99
+        전종현  93   89      12   49
+        정경준  81   64       0   25
+        양정오  83   62      82   34
+        권혜민  67   82      47   35
+        서성민  82   50      67   89
+        조현국  56   23      38   38
+        김한슬  88   11      61   64
+        김진영  28   41      64   87
+        심민혜   0   37      99   52
+        권솔이  95   58      67   87
+        김지혜  32   40      45   97
+        하진희   8    0      90   34
+        최은아  50    6      91   62
+        최민서  85   48      50   12
+        한성수  92   15      35   17
+        김윤섭  63   55      26   95
+        김승현   7   18       9   12
+        강 민  24   40       5   47
+        최건일  55   46      85   27
+        유재혁  64    5      96   95
+        김아름  37    6      90   82
+        장원종  40   16      31   44
+        '''
+
+
+        return None
+
+    @staticmethod
+    def createDf(keys, vals, len):
+        return pd.DataFrame([dict(zip(keys, vals)) for _ in range(len)])
+
+    def quiz34_iloc(self) -> str:
         # d = [{'a': 1, 'b': 2, 'c': 3, 'd': 4},
         #      {'a': 100, 'b': 200, 'c': 300, 'd': 400},
         #      {'a': 1000, 'b': 2000, 'c': 3000, 'd': 4000}]
@@ -87,14 +136,79 @@ class Quiz30:
         df = self.createDf(keys=['a', 'b', 'c', 'd'],
                            vals=np.random.randint(1, 100, 4),
                            len=3)
+
         ic(df)
+
+        '''
+        ic| df:     a   b   c   d
+                0  88  99  41  32
+                1  88  99  41  32
+                2  88  99  41  32
+        '''
+        ic(df.iloc[0])
+        '''
+        ic| df.iloc[0]: a    88
+                        b    99
+                        c    41
+                        d    32
+                        Name: 0, dtype: int32
+        '''
+        ic(df.iloc[[0]])
+        '''
+        ic| df.iloc[[0]]:     a   b   c   d
+                          0  88  99  41  32
+
+        '''
+        ic(df.iloc[[0, 1]])
+        '''
+        ic| df.iloc[[0, 1]]:     a   b   c   d
+                             0  88  99  41  32
+                             1  88  99  41  32
+        '''
+        ic(df.iloc[:3])
+        '''
+        ic| df.iloc[:3]:     a   b   c   d
+                         0  88  99  41  32
+                         1  88  99  41  32
+                         2  88  99  41  32
+        '''
+        ic(df.iloc[[True, False, True]])
+        '''
+        ic| df.iloc[[True, False, True]]:     a   b   c   d
+                                          0  88  99  41  32
+                                          2  88  99  41  32
+        '''
+        ic(df.iloc[lambda x: x.index % 2 == 0])
+        '''
+        ic| df.iloc[lambda x: x.index % 2 == 0]:     a   b   c   d
+                                                 0  88  99  41  32
+                                                 2  88  99  41  32
+        '''
+        ic(df.iloc[0, 1])
+        '''
+        ic| df.iloc[0, 1]: 99
+        '''
+        ic(df.iloc[[0, 2], [1, 3]])
+        '''
+        ic| df.iloc[[0, 2], [1, 3]]:     b   d
+                                     0  99  32
+                                     2  99  32
+        '''
+        ic(df.iloc[:, [True, False, True, False]])
+        '''
+        ic| df.iloc[:, [True, False, True, False]]:     a   c
+                                                    0  88  41
+                                                    1  88  41
+                                                    2  88  41
+        '''
+        ic(df.iloc[:, lambda df: [0, 2]])
+        '''
+        ic| df.iloc[:, lambda df: [0, 2]]:     a   c
+                                           0  88  41
+                                           1  88  41
+                                           2  88  41
+        '''
         return None
-
-    @staticmethod
-    def createDf(keys, vals, len):
-        return pd.DataFrame ([dict(zip(keys, vals)) for _ in range(len)])
-
-    def quiz34(self) -> str: return None
 
     def quiz35(self) -> str: return None
 
