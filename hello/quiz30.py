@@ -66,29 +66,33 @@ class Quiz30:
     @staticmethod
     def id(chr_size) -> str: return ''.join([random.choice(string.ascii_letters) for i in range(chr_size)])
     def quiz32_df_grade(self) -> object:
-        # a = [chr(i) for i in range(65, 90)]
-        # b = [chr(i) for i in range(97, 122)]
-        # ls = [[myRandom(10, 100) for i in range(4)] for i in range(10)]
-        # idx = [''.join([random.choice(a+b) for i in range(5)]) for i in range(10)]
-        # col = ['국어', '영어', '수학', '사회']
-        # df = pd.DataFrame(ls, index=idx, columns=col)
-        # idx = [''.join([random.choice(string.ascii_letters) for i in range(5)]) for i in range(10)]
-
-        data1 = [[myRandom(0, 101) for i in range(4)] for i in range(10)]
+        ls = np.random.randint(0, 100, (10, 4))
+        idx = [self.id(chr_size=5)for i in range(10)]
         col = ['국어', '영어', '수학', '사회']
-        idx = [self.id(chr_size=5) for i in range(10)]
-        df1 = pd.DataFrame(data1, index=idx, columns=col)
+        df1 = pd.DataFrame(ls, index=idx, columns=col)
         ic(df1)
 
-        data2 = [[myRandom(0, 101) for i in range(4)] for i in range(10)]
-        col2 = ['국어', '영어', '수학', '사회']
-        idx2 = [self.id(chr_size=5) for i in range(10)]
-        ls = dict(zip(idx2, data2))
-        df2 = pd.DataFrame.from_dict(ls, orient='index', columns=col2)
+        # ls2 = {i:j for i, j in zip(idx, ls)}
+        ls2 = dict(zip(idx, ls))
+        df2 = pd.DataFrame.from_dict(ls2, orient='index', columns=col)
         ic(df2)
+
         return None
 
-    def quiz33(self) -> str: return None
+    def quiz33_df_loc(self) -> str:
+        # d = [{'a': 1, 'b': 2, 'c': 3, 'd': 4},
+        #      {'a': 100, 'b': 200, 'c': 300, 'd': 400},
+        #      {'a': 1000, 'b': 2000, 'c': 3000, 'd': 4000}]
+        # df = pd.DataFrame([dict(zip(['A', 'B', 'C', 'D'], np.random.randint(1, 100, 4))) for _ in range(3)])
+        df = self.createDf(keys=['a', 'b', 'c', 'd'],
+                           vals=np.random.randint(1, 100, 4),
+                           len=3)
+        ic(df)
+        return None
+
+    @staticmethod
+    def createDf(keys, vals, len):
+        return pd.DataFrame ([dict(zip(keys, vals)) for _ in range(len)])
 
     def quiz34(self) -> str: return None
 
