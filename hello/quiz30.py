@@ -83,14 +83,25 @@ class Quiz30:
         subj = ['자바', '파이썬', '자바스크립트', 'SQL']
         stud = memberlist()
         data = np.random.randint(0, 100, (len(memberlist()), len(subj)))
-        df1 = pd.DataFrame.from_dict(dict(zip(stud, data)), orient='index', columns=subj)
+        # df1 = pd.DataFrame.from_dict(dict(zip(stud, data)), orient='index', columns=subj)
         # df2 = pd.DataFrame(data, index=stud, columns=subj)
-        # ic(df2)
+        # ic(df1)
         # df1.to_csv('./save/my_grade.csv', sep=',', na_rep='NaN')
         # https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html
+
         model = Model()
         grade_df = model.new_model('grade.csv')
-        ic(grade_df)
+        # ic(grade_df)
+
+        print('Q1. 파이썬의 점수만 출력하시오')
+        pythin_scores = grade_df.loc[:, ['파이썬']]
+        ic(pythin_scores)
+
+        print('Q2. 조현국의 점수만 출력하시오')
+        cho_scores = grade_df.loc[['조현국']]
+        ic(cho_scores)
+
+
 
 
         '''
@@ -137,7 +148,7 @@ class Quiz30:
                            vals=np.random.randint(1, 100, 4),
                            len=3)
 
-        ic(df)
+        # ic(df)
 
         '''
         ic| df:     a   b   c   d
@@ -145,7 +156,7 @@ class Quiz30:
                 1  88  99  41  32
                 2  88  99  41  32
         '''
-        ic(df.iloc[0])
+        # ic(df.iloc[0])
         '''
         ic| df.iloc[0]: a    88
                         b    99
@@ -153,55 +164,55 @@ class Quiz30:
                         d    32
                         Name: 0, dtype: int32
         '''
-        ic(df.iloc[[0]])
+        # ic(df.iloc[[0]])
         '''
         ic| df.iloc[[0]]:     a   b   c   d
                           0  88  99  41  32
 
         '''
-        ic(df.iloc[[0, 1]])
+        # ic(df.iloc[[0, 1]])
         '''
         ic| df.iloc[[0, 1]]:     a   b   c   d
                              0  88  99  41  32
                              1  88  99  41  32
         '''
-        ic(df.iloc[:3])
+        # ic(df.iloc[:3])
         '''
         ic| df.iloc[:3]:     a   b   c   d
                          0  88  99  41  32
                          1  88  99  41  32
                          2  88  99  41  32
         '''
-        ic(df.iloc[[True, False, True]])
+        # ic(df.iloc[[True, False, True]])
         '''
         ic| df.iloc[[True, False, True]]:     a   b   c   d
                                           0  88  99  41  32
                                           2  88  99  41  32
         '''
-        ic(df.iloc[lambda x: x.index % 2 == 0])
+        # ic(df.iloc[lambda x: x.index % 2 == 0])
         '''
         ic| df.iloc[lambda x: x.index % 2 == 0]:     a   b   c   d
                                                  0  88  99  41  32
                                                  2  88  99  41  32
         '''
-        ic(df.iloc[0, 1])
+        # ic(df.iloc[0, 1])
         '''
         ic| df.iloc[0, 1]: 99
         '''
-        ic(df.iloc[[0, 2], [1, 3]])
+        # ic(df.iloc[[0, 2], [1, 3]])
         '''
         ic| df.iloc[[0, 2], [1, 3]]:     b   d
                                      0  99  32
                                      2  99  32
         '''
-        ic(df.iloc[:, [True, False, True, False]])
+        # ic(df.iloc[:, [True, False, True, False]])
         '''
         ic| df.iloc[:, [True, False, True, False]]:     a   c
                                                     0  88  41
                                                     1  88  41
                                                     2  88  41
         '''
-        ic(df.iloc[:, lambda df: [0, 2]])
+        # ic(df.iloc[:, lambda df: [0, 2]])
         '''
         ic| df.iloc[:, lambda df: [0, 2]]:     a   c
                                            0  88  41

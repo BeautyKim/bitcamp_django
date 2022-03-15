@@ -4,12 +4,12 @@ from dataclasses import dataclass
 
 @dataclass
 class Dataset:
-    context : str
-    fname : str
-    train : str
-    test : str
-    id : str
-    label : str
+    context: str
+    fname: str
+    train: str
+    test: str
+    id: str
+    label: str
     @property
     def context(self) -> str : return self._context
     @context.setter
