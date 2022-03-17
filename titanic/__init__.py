@@ -17,6 +17,6 @@ if __name__ == '__main__':
         elif menu == '2':
             print(' #### 2. 전처리 #### ')
             model = TitanicModel(train_fname='train.csv', test_fname='test.csv')
-            # model.print_this()
+            model.preprocess()
         else:
             break
